@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelGestionStoreContainer" CdmEntityContainer="EntitiesGestion">
+    <EntitySetMapping Name="TBLUSUARIO">
+      <EntityTypeMapping TypeName="ModelGestion.TBLUSUARIO">
+        <MappingFragment StoreEntitySet="TBLUSUARIO">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="USER_NOMBRE" ColumnName="USER_NOMBRE" />
+          <ScalarProperty Name="USER_PATERNO" ColumnName="USER_PATERNO" />
+          <ScalarProperty Name="USER_MATERNO" ColumnName="USER_MATERNO" />
+          <ScalarProperty Name="USER_NICK" ColumnName="USER_NICK" />
+          <ScalarProperty Name="USER_PWD" ColumnName="USER_PWD" />
+          <ScalarProperty Name="USER_PERFIL" ColumnName="USER_PERFIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLUSUARIOROL">
+      <EntityTypeMapping TypeName="ModelGestion.TBLUSUARIOROL">
+        <MappingFragment StoreEntitySet="TBLUSUARIOROL">
+          <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLROL">
+      <EntityTypeMapping TypeName="ModelGestion.TBLROL">
+        <MappingFragment StoreEntitySet="TBLROL">
+          <ScalarProperty Name="ROL_NOMBRE" ColumnName="ROL_NOMBRE" />
+          <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

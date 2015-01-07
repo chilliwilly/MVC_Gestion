@@ -1,0 +1,47 @@
+﻿@{
+    List<MVC_Gestion.Models.MenuModel> listaMenu = ViewBag.Menu;
+}
+
+<ul class="menu">
+    @foreach (var mm in listaMenu.Where(m => m.menu_grupo == 0)) 
+    {
+        <li>
+            <a href="">@mm.menu_nombre</a>
+            @if (listaMenu.Count(m => m.menu_grupo == mm.menu_id) > 0) 
+            {
+                @:<ul>
+            }
+            
+            @RenderMenuItem(listaMenu, mm)
+
+            @if (listaMenu.Count(m => m.menu_grupo == mm.menu_id) > 0) 
+            {
+                @:</ul>
+            }
+        </li>
+    }
+</ul>
+
+@helper RenderMenuItem(List<MVC_Gestion.Models.MenuModel> listaMenu, MVC_Gestion.Models.MenuModel sm) 
+{
+    foreach (var smm in listaMenu.Where(p => p.menu_grupo == sm.menu_id)) 
+    {
+        @:<li>
+    <a href="">@smm.menu_nombre</a>
+        if (listaMenu.Count(p => p.menu_grupo == smm.menu_id) > 0)
+        {
+            @:<ul>
+        }
+
+        @RenderMenuItem(listaMenu, smm)
+
+        if (listaMenu.Count(p => p.menu_grupo == smm.menu_id) > 0)
+        {
+            @:</ul>
+        }
+        else
+        {
+            @:</li>
+        }        
+    }
+}

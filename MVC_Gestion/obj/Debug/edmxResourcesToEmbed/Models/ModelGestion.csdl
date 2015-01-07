@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelGestion" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBLUSUARIO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_NOMBRE" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_PATERNO" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="USER_MATERNO" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="USER_NICK" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_PWD" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_PERFIL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="TBLUSUARIOROL" Relationship="Self.FK_USRUSUARIO" FromRole="TBLUSUARIO" ToRole="TBLUSUARIOROL" />
+  </EntityType>
+  <EntityType Name="TBLUSUARIOROL">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="TBLUSUARIO" Relationship="Self.FK_USRUSUARIO" FromRole="TBLUSUARIOROL" ToRole="TBLUSUARIO" />
+    <NavigationProperty Name="TBLROL" Relationship="ModelGestion.FK_USRROL" FromRole="TBLUSUARIOROL" ToRole="TBLROL" />
+  </EntityType>
+  <Association Name="FK_USRUSUARIO">
+    <End Role="TBLUSUARIO" Type="Self.TBLUSUARIO" Multiplicity="1" />
+    <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLUSUARIO">
+        <PropertyRef Name="USER_ID" />
+      </Principal>
+      <Dependent Role="TBLUSUARIOROL">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EntitiesGestion" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" />
+    <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" />
+    <AssociationSet Name="FK_USRUSUARIO" Association="Self.FK_USRUSUARIO">
+      <End Role="TBLUSUARIO" EntitySet="TBLUSUARIO" />
+      <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+    </AssociationSet>
+    <EntitySet Name="TBLROL" EntityType="ModelGestion.TBLROL" />
+    <AssociationSet Name="FK_USRROL" Association="ModelGestion.FK_USRROL">
+      <End Role="TBLROL" EntitySet="TBLROL" />
+      <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBLROL">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="ROL_NOMBRE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLUSUARIOROL" Relationship="ModelGestion.FK_USRROL" FromRole="TBLROL" ToRole="TBLUSUARIOROL" />
+  </EntityType>
+  <Association Name="FK_USRROL">
+    <End Type="ModelGestion.TBLROL" Role="TBLROL" Multiplicity="1" />
+    <End Type="ModelGestion.TBLUSUARIOROL" Role="TBLUSUARIOROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLROL">
+        <PropertyRef Name="ROL_ID" />
+      </Principal>
+      <Dependent Role="TBLUSUARIOROL">
+        <PropertyRef Name="ROL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

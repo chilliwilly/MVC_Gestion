@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelGestion.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TBLROL">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="ROL_NOMBRE" Type="varchar2" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBLUSUARIO">
+    <Key>
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="USER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_NOMBRE" Type="varchar2" MaxLength="70" Nullable="false" />
+    <Property Name="USER_PATERNO" Type="varchar2" MaxLength="70" />
+    <Property Name="USER_MATERNO" Type="varchar2" MaxLength="70" />
+    <Property Name="USER_NICK" Type="varchar2" MaxLength="70" Nullable="false" />
+    <Property Name="USER_PWD" Type="varchar2" MaxLength="300" Nullable="false" />
+    <Property Name="USER_PERFIL" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBLUSUARIOROL">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+      <PropertyRef Name="USER_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="USER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_USRROL">
+    <End Role="TBLROL" Type="Self.TBLROL" Multiplicity="1" />
+    <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLROL">
+        <PropertyRef Name="ROL_ID" />
+      </Principal>
+      <Dependent Role="TBLUSUARIOROL">
+        <PropertyRef Name="ROL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USRUSUARIO">
+    <End Role="TBLUSUARIO" Type="Self.TBLUSUARIO" Multiplicity="1" />
+    <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLUSUARIO">
+        <PropertyRef Name="USER_ID" />
+      </Principal>
+      <Dependent Role="TBLUSUARIOROL">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelGestionStoreContainer">
+    <EntitySet Name="TBLROL" EntityType="Self.TBLROL" Schema="GESTION_MEJORA" store:Type="Tables" />
+    <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" Schema="GESTION_MEJORA" store:Type="Tables" />
+    <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" Schema="GESTION_MEJORA" store:Type="Tables" />
+    <AssociationSet Name="FK_USRROL" Association="Self.FK_USRROL">
+      <End Role="TBLROL" EntitySet="TBLROL" />
+      <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USRUSUARIO" Association="Self.FK_USRUSUARIO">
+      <End Role="TBLUSUARIO" EntitySet="TBLUSUARIO" />
+      <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

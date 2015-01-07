@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link href="@Url.Content("~/css/bootstrap.css")" rel="stylesheet" />
+    @RenderSection("head", required: false)   
+    
+    @*<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <script src="@Url.Content("~/js/bootstrap.js")"></script>
+
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        @Html.Partial("Menu")
+                        var usr = User.Identity.Name;
+                        <li>
+                            @*@Html.Encode(User.Identity.Name)*@
+                            @*@Html.Label(usr)*@
+                            @Html.ActionLink(usr, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Cerrar Sesión", "Logout", "Usuario")
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Acceder", "Login", "Usuario")
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)*@
+</body>
+</html>

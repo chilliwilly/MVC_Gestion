@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelGestion.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROL_NOMBRE" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUSUARIO">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_NOMBRE" Type="varchar2" MaxLength="70" Nullable="false" />
+          <Property Name="USER_PATERNO" Type="varchar2" MaxLength="70" />
+          <Property Name="USER_MATERNO" Type="varchar2" MaxLength="70" />
+          <Property Name="USER_NICK" Type="varchar2" MaxLength="70" Nullable="false" />
+          <Property Name="USER_PWD" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="USER_PERFIL" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUSUARIOROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_USRROL">
+          <End Role="TBLROL" Type="Self.TBLROL" Multiplicity="1" />
+          <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBLUSUARIOROL">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USRUSUARIO">
+          <End Role="TBLUSUARIO" Type="Self.TBLUSUARIO" Multiplicity="1" />
+          <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUSUARIO">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TBLUSUARIOROL">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelGestionStoreContainer">
+          <EntitySet Name="TBLROL" EntityType="Self.TBLROL" Schema="GESTION_MEJORA" store:Type="Tables" />
+          <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" Schema="GESTION_MEJORA" store:Type="Tables" />
+          <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" Schema="GESTION_MEJORA" store:Type="Tables" />
+          <AssociationSet Name="FK_USRROL" Association="Self.FK_USRROL">
+            <End Role="TBLROL" EntitySet="TBLROL" />
+            <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USRUSUARIO" Association="Self.FK_USRUSUARIO">
+            <End Role="TBLUSUARIO" EntitySet="TBLUSUARIO" />
+            <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelGestion" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLUSUARIO">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_NOMBRE" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PATERNO" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="USER_MATERNO" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="USER_NICK" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PWD" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PERFIL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TBLUSUARIOROL" Relationship="Self.FK_USRUSUARIO" FromRole="TBLUSUARIO" ToRole="TBLUSUARIOROL" />
+        </EntityType>
+        <EntityType Name="TBLUSUARIOROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TBLUSUARIO" Relationship="Self.FK_USRUSUARIO" FromRole="TBLUSUARIOROL" ToRole="TBLUSUARIO" />
+          <NavigationProperty Name="TBLROL" Relationship="ModelGestion.FK_USRROL" FromRole="TBLUSUARIOROL" ToRole="TBLROL" />
+        </EntityType>
+        <Association Name="FK_USRUSUARIO">
+          <End Role="TBLUSUARIO" Type="Self.TBLUSUARIO" Multiplicity="1" />
+          <End Role="TBLUSUARIOROL" Type="Self.TBLUSUARIOROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLUSUARIO">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TBLUSUARIOROL">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesGestion" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" />
+          <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" />
+          <AssociationSet Name="FK_USRUSUARIO" Association="Self.FK_USRUSUARIO">
+            <End Role="TBLUSUARIO" EntitySet="TBLUSUARIO" />
+            <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+          </AssociationSet>
+          <EntitySet Name="TBLROL" EntityType="ModelGestion.TBLROL" />
+          <AssociationSet Name="FK_USRROL" Association="ModelGestion.FK_USRROL">
+            <End Role="TBLROL" EntitySet="TBLROL" />
+            <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TBLROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="ROL_NOMBRE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBLUSUARIOROL" Relationship="ModelGestion.FK_USRROL" FromRole="TBLROL" ToRole="TBLUSUARIOROL" />
+        </EntityType>
+        <Association Name="FK_USRROL">
+          <End Type="ModelGestion.TBLROL" Role="TBLROL" Multiplicity="1" />
+          <End Type="ModelGestion.TBLUSUARIOROL" Role="TBLUSUARIOROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBLUSUARIOROL">
+              <PropertyRef Name="ROL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelGestionStoreContainer" CdmEntityContainer="EntitiesGestion">
+          <EntitySetMapping Name="TBLUSUARIO">
+            <EntityTypeMapping TypeName="ModelGestion.TBLUSUARIO">
+              <MappingFragment StoreEntitySet="TBLUSUARIO">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_NOMBRE" ColumnName="USER_NOMBRE" />
+                <ScalarProperty Name="USER_PATERNO" ColumnName="USER_PATERNO" />
+                <ScalarProperty Name="USER_MATERNO" ColumnName="USER_MATERNO" />
+                <ScalarProperty Name="USER_NICK" ColumnName="USER_NICK" />
+                <ScalarProperty Name="USER_PWD" ColumnName="USER_PWD" />
+                <ScalarProperty Name="USER_PERFIL" ColumnName="USER_PERFIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLUSUARIOROL">
+            <EntityTypeMapping TypeName="ModelGestion.TBLUSUARIOROL">
+              <MappingFragment StoreEntitySet="TBLUSUARIOROL">
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLROL">
+            <EntityTypeMapping TypeName="ModelGestion.TBLROL">
+              <MappingFragment StoreEntitySet="TBLROL">
+                <ScalarProperty Name="ROL_NOMBRE" ColumnName="ROL_NOMBRE" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
