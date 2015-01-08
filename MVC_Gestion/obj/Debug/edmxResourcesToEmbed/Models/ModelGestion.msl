@@ -30,5 +30,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBLMENU">
+      <EntityTypeMapping TypeName="ModelGestion.TBLMENU">
+        <MappingFragment StoreEntitySet="TBLMENU">
+          <ScalarProperty Name="MENU_URL" ColumnName="MENU_URL" />
+          <ScalarProperty Name="MENU_FUNCSEC" ColumnName="MENU_FUNCSEC" />
+          <ScalarProperty Name="MENU_FUNCMAIN" ColumnName="MENU_FUNCMAIN" />
+          <ScalarProperty Name="MENU_GRUPO" ColumnName="MENU_GRUPO" />
+          <ScalarProperty Name="MENU_NOMBRE" ColumnName="MENU_NOMBRE" />
+          <ScalarProperty Name="MENU_ID" ColumnName="MENU_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
