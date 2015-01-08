@@ -28,6 +28,5 @@ namespace MVC_Gestion.Models
         public DbSet<TBLUSUARIO> TBLUSUARIO { get; set; }
         public DbSet<TBLUSUARIOROL> TBLUSUARIOROL { get; set; }
         public DbSet<TBLROL> TBLROL { get; set; }
-        public DbSet<TBLMENU> TBLMENU { get; set; }
     }
 }

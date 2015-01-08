@@ -54,29 +54,29 @@ namespace MVC_Gestion.Models.Negocio
         {
             List<MenuModel> ls = new List<MenuModel>();
 
-            Models.EntitiesGestion db = new EntitiesGestion();
-            IEnumerable<Models.TBLMENU> menu = null;
+            //Models.EntitiesGestion db = new EntitiesGestion();
+            //IEnumerable<Models.TBLMENU> menu = null;
 
-            if (perfil == 1)
-            {
-                menu = db.TBLMENU.Where(it => it.MENU_FUNCMAIN == perfil).OrderBy(it => it.MENU_ID);
-            }
-            if (perfil == 2)
-            {
-                menu = db.TBLMENU.Where(it => it.MENU_FUNCSEC == perfil).OrderBy(it => it.MENU_ID);
-            }
+            //if (perfil == 1) 
+            //{
+            //    menu = db.TBLMENU.Where(it => it.MENU_FUNCMAIN == perfil).OrderBy(it => it.MENU_ID);
+            //}
+            //if (perfil == 2)
+            //{
+            //    menu = db.TBLMENU.Where(it => it.MENU_FUNCSEC == perfil).OrderBy(it => it.MENU_ID);
+            //}
 
-            foreach (Models.TBLMENU m in menu)
-            {
-                MenuModel mm = new MenuModel();
-                mm.menu_id = Convert.ToInt32(m.MENU_ID);
-                mm.menu_nombre = m.MENU_NOMBRE;
-                mm.menu_grupo = Convert.ToInt32(m.MENU_GRUPO);
-                mm.menu_funcmain = Convert.ToInt32(m.MENU_FUNCMAIN);
-                mm.menu_funcsec = Convert.ToInt32(m.MENU_FUNCSEC);
-                mm.menu_url = m.MENU_URL;
-                ls.Add(mm);
-            }
+            //foreach (Models.TBLMENU m in menu)
+            //{
+            //    MenuModel mm = new MenuModel();
+            //    mm.menu_id = Convert.ToInt32(m.MENU_ID);
+            //    mm.menu_nombre = m.MENU_NOMBRE;
+            //    mm.menu_grupo = Convert.ToInt32(m.MENU_GRUPO);
+            //    mm.menu_funcmain = Convert.ToInt32(m.MENU_FUNCMAIN);
+            //    mm.menu_funcsec = Convert.ToInt32(m.MENU_FUNCSEC);
+            //    mm.menu_url = m.MENU_URL;
+            //    ls.Add(mm);
+            //}
 
             return ls;
         }

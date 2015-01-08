@@ -153,9 +153,6 @@
     <Compile Include="Models\Negocio\CodificarPwd.cs" />
     <Compile Include="Models\Negocio\MenuNegocio.cs" />
     <Compile Include="Models\Negocio\UsuarioNegocio.cs" />
-    <Compile Include="Models\TBLMENU.cs">
-      <DependentUpon>ModelGestion.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TBLROL.cs">
       <DependentUpon>ModelGestion.tt</DependentUpon>
     </Compile>
