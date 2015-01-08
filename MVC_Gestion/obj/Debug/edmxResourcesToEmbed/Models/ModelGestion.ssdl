@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ModelGestion.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TBLMENU">
+    <Key>
+      <PropertyRef Name="MENU_ID" />
+    </Key>
+    <Property Name="MENU_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MENU_NOMBRE" Type="varchar2" MaxLength="70" Nullable="false" />
+    <Property Name="MENU_GRUPO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MENU_FUNCMAIN" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="MENU_FUNCSEC" Type="number" Precision="38" Scale="0" />
+    <Property Name="MENU_URL" Type="varchar2" MaxLength="150" />
+  </EntityType>
   <EntityType Name="TBLROL">
     <Key>
       <PropertyRef Name="ROL_ID" />
@@ -52,6 +63,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ModelGestionStoreContainer">
+    <EntitySet Name="TBLMENU" EntityType="Self.TBLMENU" Schema="GESTION_MEJORA" store:Type="Tables" />
     <EntitySet Name="TBLROL" EntityType="Self.TBLROL" Schema="GESTION_MEJORA" store:Type="Tables" />
     <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" Schema="GESTION_MEJORA" store:Type="Tables" />
     <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" Schema="GESTION_MEJORA" store:Type="Tables" />

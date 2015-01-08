@@ -47,6 +47,7 @@
       <End Role="TBLROL" EntitySet="TBLROL" />
       <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
     </AssociationSet>
+    <EntitySet Name="TBLMENU" EntityType="ModelGestion.TBLMENU" />
   </EntityContainer>
   <EntityType Name="TBLROL">
     <Key>
@@ -68,4 +69,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TBLMENU">
+    <Key>
+      <PropertyRef Name="MENU_ID" />
+    </Key>
+    <Property Name="MENU_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="MENU_NOMBRE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="MENU_GRUPO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="MENU_FUNCMAIN" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="MENU_FUNCSEC" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="MENU_URL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

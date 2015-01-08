@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ModelGestion.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLMENU">
+          <Key>
+            <PropertyRef Name="MENU_ID" />
+          </Key>
+          <Property Name="MENU_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MENU_NOMBRE" Type="varchar2" MaxLength="70" Nullable="false" />
+          <Property Name="MENU_GRUPO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MENU_FUNCMAIN" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MENU_FUNCSEC" Type="number" Precision="38" Scale="0" />
+          <Property Name="MENU_URL" Type="varchar2" MaxLength="150" />
+        </EntityType>
         <EntityType Name="TBLROL">
           <Key>
             <PropertyRef Name="ROL_ID" />
@@ -57,6 +68,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelGestionStoreContainer">
+          <EntitySet Name="TBLMENU" EntityType="Self.TBLMENU" Schema="GESTION_MEJORA" store:Type="Tables" />
           <EntitySet Name="TBLROL" EntityType="Self.TBLROL" Schema="GESTION_MEJORA" store:Type="Tables" />
           <EntitySet Name="TBLUSUARIO" EntityType="Self.TBLUSUARIO" Schema="GESTION_MEJORA" store:Type="Tables" />
           <EntitySet Name="TBLUSUARIOROL" EntityType="Self.TBLUSUARIOROL" Schema="GESTION_MEJORA" store:Type="Tables" />
@@ -120,6 +132,7 @@
             <End Role="TBLROL" EntitySet="TBLROL" />
             <End Role="TBLUSUARIOROL" EntitySet="TBLUSUARIOROL" />
           </AssociationSet>
+          <EntitySet Name="TBLMENU" EntityType="ModelGestion.TBLMENU" />
         </EntityContainer>
         <EntityType Name="TBLROL">
           <Key>
@@ -141,6 +154,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TBLMENU">
+          <Key>
+            <PropertyRef Name="MENU_ID" />
+          </Key>
+          <Property Name="MENU_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="MENU_NOMBRE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="MENU_GRUPO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="MENU_FUNCMAIN" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="MENU_FUNCSEC" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MENU_URL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -173,6 +197,18 @@
               <MappingFragment StoreEntitySet="TBLROL">
                 <ScalarProperty Name="ROL_NOMBRE" ColumnName="ROL_NOMBRE" />
                 <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLMENU">
+            <EntityTypeMapping TypeName="ModelGestion.TBLMENU">
+              <MappingFragment StoreEntitySet="TBLMENU">
+                <ScalarProperty Name="MENU_URL" ColumnName="MENU_URL" />
+                <ScalarProperty Name="MENU_FUNCSEC" ColumnName="MENU_FUNCSEC" />
+                <ScalarProperty Name="MENU_FUNCMAIN" ColumnName="MENU_FUNCMAIN" />
+                <ScalarProperty Name="MENU_GRUPO" ColumnName="MENU_GRUPO" />
+                <ScalarProperty Name="MENU_NOMBRE" ColumnName="MENU_NOMBRE" />
+                <ScalarProperty Name="MENU_ID" ColumnName="MENU_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
